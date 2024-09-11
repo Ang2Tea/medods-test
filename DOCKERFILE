@@ -7,12 +7,13 @@ RUN go mod download && go mod tidy
 
 COPY . .
 
-RUN go build -o /medods ./main.go
+RUN go build -o /medods-app ./main.go
 
 FROM alpine:3
 WORKDIR /app
 
-COPY --from=builder medods ./main
+COPY --from=builder /medods-app ./main
+COPY ./config ./config
 
 EXPOSE 4200-4300
 ENTRYPOINT ["./main"]
