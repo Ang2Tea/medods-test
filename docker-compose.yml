@@ -1,0 +1,20 @@
+
+services: 
+  db:
+    image: postgres:16.1
+    restart: always
+    env_file:
+      - path: ./config/.env
+        required: true
+    ports:
+      - "3001:5432"
+
+  medods:
+    build:
+      context: .
+    restart: always
+    hostname: medods
+    depends_on:
+      - db
+    volumes:
+      - ./config:/config  

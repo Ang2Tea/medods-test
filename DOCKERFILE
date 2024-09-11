@@ -1,4 +1,4 @@
-FROM golang:1.22-alpine as builder
+FROM golang:1.22-alpine AS builder
 WORKDIR /build
 
 COPY go.* ./
@@ -13,7 +13,8 @@ FROM alpine:3
 WORKDIR /app
 
 COPY --from=builder /medods-app ./main
-COPY ./config ./config
 
-EXPOSE 4200-4300
+EXPOSE 8042
+VOLUME ["/config"]
+
 ENTRYPOINT ["./main"]
