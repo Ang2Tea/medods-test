@@ -1,0 +1,18 @@
+FROM golang:1.22-alpine as builder
+WORKDIR /build
+
+COPY go.* ./
+
+RUN go mod download && go mod tidy
+
+COPY . .
+
+RUN go build -o /medods ./main.go
+
+FROM alpine:3
+WORKDIR /app
+
+COPY --from=builder medods ./main
+
+EXPOSE 4200-4300
+ENTRYPOINT ["./main"]
