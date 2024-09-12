@@ -1,6 +1,7 @@
 
 services: 
   db:
+    hostname: medods-db
     image: postgres:16.1
     restart: always
     env_file:
@@ -16,5 +17,9 @@ services:
     hostname: medods
     depends_on:
       - db
+    env_file:
+      - ./config/.env
+    environment:
+      POSTGRES_HOST: medods-db
     volumes:
       - ./config:/config  
