@@ -1,4 +1,4 @@
-name: MEDODS TEST v0.1.0
+name: "MEDODS TEST v0.1.0"
 mode: docker
 web-server:
   port: 8042

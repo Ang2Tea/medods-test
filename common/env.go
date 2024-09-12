@@ -2,9 +2,9 @@ package common
 
 import "os"
 
-const (
-	JWT_SECRET_KEY = "JWT_SECRET_KEY"
-)
+const CONFIG_DIRECTORY = "CONFIG_DIRECTORY"
+
+const JWT_SECRET_KEY = "JWT_SECRET_KEY"
 
 const (
 	POSTGRES_USERNAME      = "POSTGRES_USERNAME"

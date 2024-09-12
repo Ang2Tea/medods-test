@@ -14,15 +14,18 @@ import (
 )
 
 const (
-	defaultConfigPath = "config/config.yaml"
-	defaultEnvPath    = "config/.env"
+	configFile = "config.yml"
+	envFile    = ".env"
 )
 
 func main() {
-	config := common.GetConfig(defaultConfigPath)
+	var configDirectory string
+	common.LookupEnv(&configDirectory, common.CONFIG_DIRECTORY, "config")
+
+	config := common.GetConfig(fmt.Sprintf("%s/%s", configDirectory, configFile))
 
 	if config.Mode == common.DebugMode {
-		err := godotenv.Load(defaultEnvPath)
+		err := godotenv.Load(fmt.Sprintf("%s/%s", configDirectory, envFile))
 		common.PanicIfErr(err)
 	}
 
