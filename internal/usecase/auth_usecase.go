@@ -56,7 +56,7 @@ func (a *authUsecase) Refresh(ctx context.Context, request RefreshRequest) (*Tok
 		IPAddress: user.LastIPAddress,
 	}
 
-	if user.LastIPAddress != request.IPAddress {
+	if user.LastIPAddress != request.IPAddress && a.events != nil {
 		a.events.IPAddressChanged(ctx, user.LastIPAddress, request.IPAddress)
 	}
 

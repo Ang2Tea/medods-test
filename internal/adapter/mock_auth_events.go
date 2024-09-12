@@ -12,6 +12,10 @@ var _ usecase.IAuthEvent = (*mockAuthEvent)(nil)
 
 type mockAuthEvent struct{}
 
+func NewMockAuthEvent() *mockAuthEvent {
+	return &mockAuthEvent{}
+}
+
 func (m *mockAuthEvent) IPAddressChanged(ctx context.Context, oldIPAddress string, newIPAddress string) {
 	log.Println("INFO", time.Now(), "IPAddressChanged", oldIPAddress, newIPAddress)
 }
