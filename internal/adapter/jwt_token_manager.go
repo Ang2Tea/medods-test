@@ -25,12 +25,12 @@ type CustomClaims struct {
 var _ usecase.ITokenManager = (*jwtTokenManager)(nil)
 
 type jwtTokenManager struct {
-	secretKey string
+	secretKey []byte
 }
 
 func NewJWTTokenManager(secret string) *jwtTokenManager {
 	return &jwtTokenManager{
-		secretKey: secret,
+		secretKey: []byte(secret),
 	}
 }
 
@@ -66,7 +66,7 @@ func (j *jwtTokenManager) genAccessToken(userID uuid.UUID, ipAddress string) (st
 }
 
 func (j *jwtTokenManager) genRefreshToken(accessToken string) (string, error) {
-	rawKey := append([]byte(accessToken), []byte(j.secretKey)...)
+	rawKey := append([]byte(accessToken), j.secretKey...)
 	s := sha1.Sum(rawKey)
 
 	return base64.StdEncoding.EncodeToString(s[:]), nil

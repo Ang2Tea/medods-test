@@ -28,7 +28,7 @@ func (f *fiberRoutes) RegisterRoutes(app *fiber.App) {
 func (f *fiberRoutes) Auth(c *fiber.Ctx) error {
 	ctx := context.Background()
 
-	strUserID := c.Params("user-id")
+	strUserID := c.Get("user-id")
 	if strUserID == "" {
 		return fiberError(c, fiber.StatusBadRequest, errors.New("user id is required"))
 	}
@@ -56,7 +56,7 @@ func (f *fiberRoutes) Auth(c *fiber.Ctx) error {
 func (f *fiberRoutes) Refresh(c *fiber.Ctx) error {
 	ctx := context.Background()
 
-	refreshToken := c.Params("refresh-token")
+	refreshToken := c.Get("refresh-token")
 	if refreshToken == "" {
 		return fiberError(c, fiber.StatusBadRequest, errors.New("refresh token is required"))
 	}

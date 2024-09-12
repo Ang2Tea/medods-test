@@ -3,7 +3,6 @@ package adapter
 import (
 	"context"
 	"log"
-	"time"
 
 	"Ang2Tea/medods-test/internal/usecase"
 )
@@ -17,5 +16,5 @@ func NewMockAuthEvent() *mockAuthEvent {
 }
 
 func (m *mockAuthEvent) IPAddressChanged(ctx context.Context, oldIPAddress string, newIPAddress string) {
-	log.Println("INFO", time.Now(), "IPAddressChanged", oldIPAddress, newIPAddress)
+	log.Println("INFO", "IPAddressChanged", oldIPAddress, newIPAddress)
 }
